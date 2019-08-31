@@ -54,7 +54,6 @@ public class SignIn extends AppCompatActivity {
 
         final String localPhone = phone;
         final String localPassword = password;
-
         users.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -62,22 +61,22 @@ public class SignIn extends AppCompatActivity {
                     mDialog.dismiss();
                     User user = dataSnapshot.child(localPhone).getValue(User.class);
                     user.setPhone(localPhone);
-                    if(Boolean.parseBoolean(user.getIsStaff())){ //IsStaff == true
-                        if(user.getPassword().equals(localPassword)){
+                    if (Boolean.parseBoolean(user.getIsStaff())) { //IsStaff == true
+                        if (user.getPassword().equals(localPassword)) {
                             //login ok
-                            Intent login = new Intent(SignIn.this,Home.class);
-                            Common.currentUser = user;
+                            Intent login = new Intent(SignIn.this, Home.class);
+                            //Common.currentUser = user;
                             startActivity(login);
                             finish();
-                        }else
-                            Toast.makeText(SignIn.this,"Yanlış Parola",Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(SignIn.this, "Yanlış Parola", Toast.LENGTH_SHORT).show();
 
-                    }else
-                        Toast.makeText(SignIn.this,"Lütfen admin  oturumu açın",Toast.LENGTH_SHORT).show();
+                   } else
+                       Toast.makeText(SignIn.this, "Lütfen admin  oturumu açın", Toast.LENGTH_SHORT).show();
 
-                }else{
+                } else {
                     mDialog.dismiss();
-                    Toast.makeText(SignIn.this,"Böyle bir kullanıcı yoktur.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignIn.this, "Böyle bir kullanıcı yoktur.", Toast.LENGTH_SHORT).show();
 
                 }
             }
