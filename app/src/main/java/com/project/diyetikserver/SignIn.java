@@ -31,8 +31,8 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        edtPassword = findViewById(R.id.edtPassword);
-        edtPhone = findViewById(R.id.edtPhone);
+        edtPassword = findViewById(R.id.edtPasswordServer);
+        edtPhone = findViewById(R.id.edtPhoneServer);
         btnSigin = findViewById(R.id.btnSignIn);
 
         db = FirebaseDatabase.getInstance();
@@ -57,11 +57,12 @@ public class SignIn extends AppCompatActivity {
         users.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(localPhone).exists()) {
+                if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
                     mDialog.dismiss();
-                    User user = dataSnapshot.child(localPhone).getValue(User.class);
-                    user.setPhone(localPhone);
+                    User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                    user.setPhone(edtPhone.getText().toString());
                     if (Boolean.parseBoolean(user.getIsStaff())) { //IsStaff == true
+
                         if (user.getPassword().equals(localPassword)) {
                             //login ok
                             Intent login = new Intent(SignIn.this, Home.class);

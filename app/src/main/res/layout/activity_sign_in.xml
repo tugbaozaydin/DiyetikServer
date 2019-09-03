@@ -15,12 +15,12 @@
         android:layout_height="wrap_content">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtPhone"
+            android:id="@+id/edtPhoneServer"
             android:hint="Phone Number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:text="0988123355"
+            android:text="0000"
             android:textColor="@android:color/white"
             android:textSize="34sp"
             android:inputType="phone"
@@ -32,7 +32,7 @@
 
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtPassword"
+            android:id="@+id/edtPasswordServer"
             android:hint="Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.project.diyetikserver;
+package com.project.diyetikserver.Model;
 
 public class Category {
     private String Name;

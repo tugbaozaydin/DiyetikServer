@@ -1,4 +1,4 @@
-package com.project.diyetikserver;
+package com.project.diyetikserver.Interface;
 
 import android.view.View;
 

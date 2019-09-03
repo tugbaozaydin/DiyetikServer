@@ -105,6 +105,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "283041708397-nkhu320na26f9nnbfhv2c6bta3ci2tfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.diyetikserver",
+            "certificate_hash": "8b8da7c78685d755a6f46ebf3ebe4f7433df8f0a"
+          }
+        },
+        {
           "client_id": "283041708397-sr5t5gpje1q4kbjb8ftqr557fafbjkh3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
