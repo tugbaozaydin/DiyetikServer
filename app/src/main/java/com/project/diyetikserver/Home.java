@@ -28,8 +28,12 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -37,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import com.project.diyetikserver.Common.Common;
 import com.project.diyetikserver.Interface.ItemClickListener;
 import com.project.diyetikserver.Model.Category;
+import com.project.diyetikserver.Service.ListenOrder;
 import com.project.diyetikserver.ViewHolder.MenuViewHolder;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
@@ -110,6 +115,10 @@ public class Home extends AppCompatActivity
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
+
+        //Call service
+        Intent service = new Intent(Home.this, ListenOrder.class);
+        startService(service);
 
 
     }
@@ -317,7 +326,6 @@ public class Home extends AppCompatActivity
 
     //Update/Delete
 
-
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if(item.getTitle().equals(Common.UPDATE)){
@@ -331,6 +339,23 @@ public class Home extends AppCompatActivity
     }
 
     private void DeleteCategory(String key) {
+//First, we need get all food in category
+        DatabaseReference foods = database.getReference("Foods");
+        Query foodInCategory = foods.orderByChild("menuId").equalTo(key);
+        foodInCategory.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapShot:dataSnapshot.getChildren()){
+                    postSnapShot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         categories.child(key).removeValue();
         Toast.makeText(this,"Kategori silindi!!!",Toast.LENGTH_SHORT).show();
     }
