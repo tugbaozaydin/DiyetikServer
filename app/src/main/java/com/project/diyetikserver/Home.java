@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -41,7 +42,7 @@ import com.google.firebase.storage.UploadTask;
 import com.project.diyetikserver.Common.Common;
 import com.project.diyetikserver.Interface.ItemClickListener;
 import com.project.diyetikserver.Model.Category;
-import com.project.diyetikserver.Service.ListenOrder;
+import com.project.diyetikserver.Model.Token;
 import com.project.diyetikserver.ViewHolder.MenuViewHolder;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
@@ -69,7 +70,7 @@ public class Home extends AppCompatActivity
 
     Category newCategory;
     Uri saveUri;
-    private  final int PICK_IMAGE_REQUEST = 71;
+    private final int PICK_IMAGE_REQUEST = 71;
 
 
     @Override
@@ -94,7 +95,7 @@ public class Home extends AppCompatActivity
             }
         });
 
-         drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -117,10 +118,20 @@ public class Home extends AppCompatActivity
         loadMenu();
 
         //Call service
-        Intent service = new Intent(Home.this, ListenOrder.class);
-        startService(service);
+        /*Intent service = new Intent(Home.this, ListenOrder.class);
+        startService(service);*/
+
+        //Register service
+        updateToken(FirebaseInstanceId.getInstance().getToken());
 
 
+    }
+
+    private void updateToken(String token) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference tokens = db.getReference("Tokens");
+        Token data = new Token(token,true);
+        tokens.child(Common.currentUser.getPhone()).setValue(data);
     }
 
     private void showDialog() {
@@ -155,7 +166,7 @@ public class Home extends AppCompatActivity
                 dialog.dismiss();
                 if (newCategory != null) {
                     categories.push().setValue(newCategory);
-                    Snackbar.make(drawer,"Yeni kategori"+newCategory.getName()+"eklendi.",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(drawer, "Yeni kategori" + newCategory.getName() + "eklendi.", Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -221,7 +232,7 @@ public class Home extends AppCompatActivity
         Intent i = new Intent();
         i.setType("image/");
         i.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(i, "Select Picture"),PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
     private void loadMenu() {
@@ -241,8 +252,8 @@ public class Home extends AppCompatActivity
                     public void onClick(View view, int position, boolean isLongClick) {
                         //send category Id and start new activity
 
-                        Intent foodList= new Intent(Home.this,FoodList.class);
-                        foodList.putExtra("CategoryId",adapter.getRef(position).getKey());
+                        Intent foodList = new Intent(Home.this, FoodList.class);
+                        foodList.putExtra("CategoryId", adapter.getRef(position).getKey());
                         startActivity(foodList);
                     }
                 });
@@ -295,7 +306,7 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_orders) {
-            Intent orders = new Intent(Home.this,OrderStatus.class);
+            Intent orders = new Intent(Home.this, OrderStatus.class);
             startActivity(orders);
 
         }
@@ -328,10 +339,9 @@ public class Home extends AppCompatActivity
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if(item.getTitle().equals(Common.UPDATE)){
-            showUpdateDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
-        }
-        else if(item.getTitle().equals(Common.DELETE)){
+        if (item.getTitle().equals(Common.UPDATE)) {
+            showUpdateDialog(adapter.getRef(item.getOrder()).getKey(), adapter.getItem(item.getOrder()));
+        } else if (item.getTitle().equals(Common.DELETE)) {
             DeleteCategory(adapter.getRef(item.getOrder()).getKey());
         }
 
@@ -345,7 +355,7 @@ public class Home extends AppCompatActivity
         foodInCategory.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapShot:dataSnapshot.getChildren()){
+                for (DataSnapshot postSnapShot : dataSnapshot.getChildren()) {
                     postSnapShot.getRef().removeValue();
                 }
             }
@@ -357,7 +367,7 @@ public class Home extends AppCompatActivity
         });
 
         categories.child(key).removeValue();
-        Toast.makeText(this,"Kategori silindi!!!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Kategori silindi!!!", Toast.LENGTH_SHORT).show();
     }
 
     private void showUpdateDialog(final String key, final Category item) {
