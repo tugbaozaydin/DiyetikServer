@@ -19,6 +19,8 @@ public class Common {
     public static Request currentRequest;
     public static final String UPDATE = "Update";
 
+    public static String PHONE_TEXT= "userPhone";
+
     public static final String DELETE = "Delete";
 
     public static final String baseUrl = "https://maps.googleapis.com";
