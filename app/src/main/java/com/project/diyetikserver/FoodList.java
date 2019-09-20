@@ -16,14 +16,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageMetadata;
@@ -206,6 +209,44 @@ public class FoodList extends AppCompatActivity {
         }
     }
     private void loadListFood(String categoryId) {
+        Query listFoodByCategoryId=foodList.orderByChild("menuId").equalTo(categoryId);
+        FirebaseRecyclerOptions<Food> options= new FirebaseRecyclerOptions.Builder<Food>()
+                .setQuery(listFoodByCategoryId,Food.class)
+                .build();
+
+        adapter= new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull FoodViewHolder viewHolder, int position, @NonNull Food model) {
+                viewHolder.foodName.setText(model.getName());
+                Picasso.with(getBaseContext()).load(model.getImage()).
+                        into(viewHolder.foodImage);
+                final Food local = model;
+                viewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+                      // start new activity
+                        Intent foodDetail = new Intent(FoodList.this,OrderDetail.class);
+                        // Because category ıd is key ,so we just get key of this item
+                        foodDetail.putExtra("FoodId", adapter.getRef(position).getKey());// send foodId to new Activity
+                        startActivity(foodDetail);
+                         }
+                         });
+            }
+
+
+            @NonNull
+            @Override
+            public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+                View itemView= (View) LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.food_item,parent,false);
+                return new FoodViewHolder(itemView);
+            }
+        };
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
+
+        /*
         adapter= new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
                 Food.class,
                 R.layout.food_item,
@@ -227,12 +268,18 @@ public class FoodList extends AppCompatActivity {
                         // Because category ıd is key ,so we just get key of this item
                         foodDetail.putExtra("FoodId", adapter.getRef(position).getKey());// send foodId to new Activity
                         startActivity(foodDetail);*/
-                    }
-                });
-            }
-        };
-        adapter.notifyDataSetChanged();
-        recyclerView.setAdapter(adapter);
+                   // }
+              //  });
+            //}
+        //};
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     @Override

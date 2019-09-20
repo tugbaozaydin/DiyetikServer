@@ -22,10 +22,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +44,7 @@ import com.google.firebase.storage.UploadTask;
 import com.project.diyetikserver.Common.Common;
 import com.project.diyetikserver.Interface.ItemClickListener;
 import com.project.diyetikserver.Model.Category;
+import com.project.diyetikserver.Model.Food;
 import com.project.diyetikserver.Model.Token;
 import com.project.diyetikserver.ViewHolder.MenuViewHolder;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -236,13 +239,13 @@ public class Home extends AppCompatActivity
     }
 
     private void loadMenu() {
-        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(
-                Category.class,
-                R.layout.menu_item,
-                MenuViewHolder.class,
-                categories) {
+        FirebaseRecyclerOptions<Category> options= new FirebaseRecyclerOptions.Builder<Category>()
+                .setQuery(categories,Category.class)
+                .build();
+
+        adapter=new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
             @Override
-            protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
+            protected void onBindViewHolder(@NonNull MenuViewHolder viewHolder, int position, @NonNull Category model) {
                 viewHolder.txtMenuName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage()).
                         into(viewHolder.imageView);
@@ -257,25 +260,26 @@ public class Home extends AppCompatActivity
                         startActivity(foodList);
                     }
                 });
-              /*  final Category clickItem = model;
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        // Toast.makeText(Home.this,""+clickItem.getName(),Toast.LENGTH_SHORT).show();
-                        // Get categoryId and send to new Activity
-                        Intent foodList = new Intent(Home.this,FoodList.class);
-                        // Because category ıd is key ,so we just get key of this item
-                        foodList.putExtra("CategoryId", adapter.getRef(position).getKey());
-                        startActivity(foodList);
-                    }
-                });*/
             }
 
+            @NonNull
+            @Override
+            public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                return null;
+            }
         };
+        adapter.startListening();
+
         adapter.notifyDataSetChanged();
         recycler_menu.setAdapter(adapter);
-    }
 
+
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
