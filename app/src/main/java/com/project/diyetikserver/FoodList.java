@@ -56,6 +56,7 @@ public class FoodList extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    RelativeLayout rootLayout;
 
     FloatingActionButton fab;
 
@@ -67,7 +68,6 @@ public class FoodList extends AppCompatActivity {
 
     Food newFood;
 
-    RelativeLayout rootLayout;
 
     private  final int PICK_IMAGE_REQUEST = 71;
     Uri saveUri;
@@ -113,14 +113,14 @@ public class FoodList extends AppCompatActivity {
         alertDialog.setMessage("Lütfen tüm alanları doldurunuz.");
 
         LayoutInflater inflater = this.getLayoutInflater();
-        View add_manu_layout = inflater.inflate(R.layout.add_new_food_layout, null);
-        edtName = add_manu_layout.findViewById(R.id.edtName);
-        edtDescription = add_manu_layout.findViewById(R.id.edtDescription);
-        edtPrice = add_manu_layout.findViewById(R.id.edtPrice);
-        edtDiscount = add_manu_layout.findViewById(R.id.edtDiscount);
+        View add_menu_layout = inflater.inflate(R.layout.add_new_food_layout, null);
+        edtName = add_menu_layout.findViewById(R.id.edtName);
+        edtDescription = add_menu_layout.findViewById(R.id.edtDescription);
+        edtPrice = add_menu_layout.findViewById(R.id.edtPrice);
+        edtDiscount = add_menu_layout.findViewById(R.id.edtDiscount);
 
-        btnSelect = add_manu_layout.findViewById(R.id.btnSelect);
-        btnUpload = add_manu_layout.findViewById(R.id.btnUpload);
+        btnSelect = add_menu_layout.findViewById(R.id.btnSelect);
+        btnUpload = add_menu_layout.findViewById(R.id.btnUpload);
 
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +134,7 @@ public class FoodList extends AppCompatActivity {
                 uploadImage();
             }
         });
-        alertDialog.setView(add_manu_layout);
+        alertDialog.setView(add_menu_layout);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

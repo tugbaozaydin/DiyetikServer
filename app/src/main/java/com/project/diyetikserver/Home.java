@@ -315,6 +315,12 @@ public class Home extends AppCompatActivity
 
         }
 
+        else if (id == R.id.nav_banner) {
+            Intent banner = new Intent(Home.this, BannerActivity.class);
+            startActivity(banner);
+
+        }
+
      /*   if (id == R.id.nav_menu) {
             // Handle the camera action
         } else if (id == R.id.nav_cart) {
