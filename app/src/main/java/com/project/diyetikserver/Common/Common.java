@@ -17,6 +17,8 @@ import retrofit2.Retrofit;
 public class Common {
     public static User currentUser;
     public static Request currentRequest;
+
+    public static final String topicName="News";
     public static final String UPDATE = "Update";
 
     public static String PHONE_TEXT= "userPhone";

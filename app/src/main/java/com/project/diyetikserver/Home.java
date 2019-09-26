@@ -320,6 +320,11 @@ public class Home extends AppCompatActivity
             startActivity(banner);
 
         }
+        else if (id == R.id.nav_message) {
+            Intent banner = new Intent(Home.this, SendMessage.class);
+            startActivity(banner);
+
+        }
 
      /*   if (id == R.id.nav_menu) {
             // Handle the camera action
