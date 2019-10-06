@@ -333,7 +333,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
 
                 jObject=new JSONObject(strings[0]);
                 DirectionJSONParser parser=new DirectionJSONParser();
-                routes= parser.parse(jObject);
+                //routes= parser.parse(jObject);
                 //DirectionJSONParser sınıfı boş şu an ondan hata veriyor.
             }
             catch (JSONException e){

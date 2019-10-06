@@ -81,6 +81,7 @@ public class OrderStatus extends AppCompatActivity {
                 viewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(model.getStatus()));
                 viewHolder.txtOrderAddress.setText(model.getAddress());
                 viewHolder.txtOrderPhone.setText(model.getPhone());
+                viewHolder.txtOrderDate.setText(Common.getDate(Long.parseLong(adapter.getRef(position).getKey())));
                 viewHolder.btnEdit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

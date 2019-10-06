@@ -1,5 +1,6 @@
 package com.project.diyetikserver;
 
+import android.app.Notification;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class SendMessage extends AppCompatActivity {
         edtTitle=(MaterialEditText)findViewById(R.id.edtTitle);
 
         btnSend=(FButton)findViewById(R.id.btnSend);
-        btnSend.setOnClickListener(new View.OnClickListener() {
+/*        btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Notification notification=new Notification(edtTitle.getText().toString(),edtMessage.getText().toString());
@@ -55,6 +56,6 @@ public class SendMessage extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
     }
 }

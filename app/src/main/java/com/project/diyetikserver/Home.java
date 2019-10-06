@@ -325,6 +325,11 @@ public class Home extends AppCompatActivity
             startActivity(banner);
 
         }
+        else if (id == R.id.nav_shipper) {
+            Intent banner = new Intent(Home.this, ShipperManagement.class);
+            startActivity(banner);
+
+        }
 
      /*   if (id == R.id.nav_menu) {
             // Handle the camera action

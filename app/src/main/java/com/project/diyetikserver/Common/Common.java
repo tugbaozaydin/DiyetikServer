@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.text.format.DateFormat;
 
 import com.project.diyetikserver.Model.Request;
 import com.project.diyetikserver.Model.User;
@@ -12,9 +13,13 @@ import com.project.diyetikserver.Remote.IGeoCoordinates;
 import com.project.diyetikserver.Remote.RetrofitClient;
 import com.project.diyetikserver.Service.FCMRetrofitClient;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import retrofit2.Retrofit;
 
 public class Common {
+    public static final String SHIPPERS_TABLE = "Shippers" ;
     public static User currentUser;
     public static Request currentRequest;
 
@@ -59,5 +64,13 @@ public class Common {
         canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
 
         return scaledBitmap;
+    }
+
+    public static String getDate(long time){
+        Calendar calendar =Calendar.getInstance(Locale.ENGLISH);
+        calendar.setTimeInMillis(time);
+        StringBuilder date = new StringBuilder(DateFormat.format("dd-MM-yyyy HH:mm",
+                calendar).toString());
+        return  date.toString();
     }
 }

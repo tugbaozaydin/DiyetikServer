@@ -12,7 +12,7 @@ import com.project.diyetikserver.R;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder  {
 
-    public TextView txtOrderId, txtOrderStatus, txtOrderPhone, txtOrderAddress;
+    public TextView txtOrderId, txtOrderStatus, txtOrderDate,txtOrderPhone, txtOrderAddress;
     public Button btnEdit, btnRemove, btnDetail, btnDirection;
 
 
@@ -20,9 +20,12 @@ public class OrderViewHolder extends RecyclerView.ViewHolder  {
         super(itemView);
 
         txtOrderAddress = (TextView) itemView.findViewById(R.id.order_address);
-        txtOrderId = (TextView) itemView.findViewById(R.id.order_id);
+        txtOrderId = (TextView) itemView.findViewById(R.id.order_name);
         txtOrderPhone = (TextView) itemView.findViewById(R.id.order_phone);
         txtOrderStatus = (TextView) itemView.findViewById(R.id.order_status);
+        txtOrderDate = (TextView) itemView.findViewById(R.id.order_date);
+
+        //Görselde buton yok horizontal(yanyana) dört buton eklenecek
         btnDetail = itemView.findViewById(R.id.btnDetail);
         btnEdit = itemView.findViewById(R.id.btnEdit);
         btnRemove = itemView.findViewById(R.id.btnRemove);
