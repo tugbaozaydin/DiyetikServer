@@ -1,8 +1,8 @@
 package com.project.diyetikserver.Remote;
 
 
+import com.project.diyetikserver.Model.DataMessage;
 import com.project.diyetikserver.Model.MyResponse;
-import com.project.diyetikserver.Model.Sender;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,5 +19,5 @@ public interface APIService {
             }
     )
     @POST("fcm/send")
-    Call<MyResponse> sendNotification(@Body Sender body);
+    Call<MyResponse> sendNotification(@Body DataMessage body);
 }

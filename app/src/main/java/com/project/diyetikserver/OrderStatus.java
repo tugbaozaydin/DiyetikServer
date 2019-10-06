@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -25,17 +23,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.project.diyetikserver.Common.Common;
-import com.project.diyetikserver.Interface.ItemClickListener;
-import com.project.diyetikserver.Model.Category;
+import com.project.diyetikserver.Model.DataMessage;
 import com.project.diyetikserver.Model.MyResponse;
-import com.project.diyetikserver.Model.Notification;
-import com.project.diyetikserver.Model.Order;
 import com.project.diyetikserver.Model.Request;
-import com.project.diyetikserver.Model.Sender;
 import com.project.diyetikserver.Model.Token;
 import com.project.diyetikserver.Remote.APIService;
-import com.project.diyetikserver.ViewHolder.FoodViewHolder;
 import com.project.diyetikserver.ViewHolder.OrderViewHolder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -190,9 +186,15 @@ public class OrderStatus extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Token token = postSnapshot.getValue(Token.class);
 
-                    Notification notification = new Notification("Diyet Sepeti", "Your Order" + key + "was updated");
-                    Sender content = new Sender(token.getToken(), notification);
-                    mService.sendNotification(content).enqueue(new Callback<MyResponse>() {
+//                    Notification notification = new Notification("Diyet Sepeti", "Your Order" + key + "was updated");
+//                    Sender content = new Sender(token.getToken(), notification);
+
+                    Map<String,String> dataSend= new HashMap<>();
+                    dataSend.put("title","Diyet Sepeti");
+                    dataSend.put("message","Your Order" + key + "was updated");
+                    DataMessage dataMessage = new DataMessage(token.getToken(),dataSend);
+
+                    mService.sendNotification(dataMessage).enqueue(new Callback<MyResponse>() {
                         @Override
                         public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                             if (response.body().success == 1) {

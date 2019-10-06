@@ -7,8 +7,6 @@ import android.widget.Toast;
 
 import com.project.diyetikserver.Common.Common;
 import com.project.diyetikserver.Model.MyResponse;
-import com.project.diyetikserver.Model.Notification;
-import com.project.diyetikserver.Model.Sender;
 import com.project.diyetikserver.Remote.APIService;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
