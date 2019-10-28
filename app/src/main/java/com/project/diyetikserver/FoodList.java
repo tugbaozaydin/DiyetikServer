@@ -102,7 +102,7 @@ public class FoodList extends AppCompatActivity {
         });
 
         if(getIntent()!= null)
-            categoryId=getIntent().getStringExtra("CategoryId");
+            categoryId=getIntent().getStringExtra("menuId");
         if(categoryId.isEmpty())
             loadListFood(categoryId);
     }
@@ -137,7 +137,7 @@ public class FoodList extends AppCompatActivity {
         alertDialog.setView(add_menu_layout);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
-        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("Evet Ekle", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -147,7 +147,7 @@ public class FoodList extends AppCompatActivity {
                 }
             }
         });
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("Hayır Ekleme", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -157,9 +157,10 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void chooseImage() {
-        Intent i = new Intent();
+        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
         i.setType("image/");
-        i.setAction(Intent.ACTION_GET_CONTENT);
+       // i.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(i, "Fotoğraf seçiniz"), PICK_IMAGE_REQUEST);
     }
 
@@ -167,7 +168,7 @@ public class FoodList extends AppCompatActivity {
 
         if (saveUri != null) {
             final ProgressDialog mDialog = new ProgressDialog(this);
-            mDialog.setMessage("Uploading...");
+            mDialog.setMessage("Yükleniyor...");
             mDialog.show();
 
             String imageName = UUID.randomUUID().toString();
@@ -203,7 +204,7 @@ public class FoodList extends AppCompatActivity {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    mDialog.setMessage("Uploaded" + progress + "%");
+                    mDialog.setMessage("Yüklendi" + progress + "%");
                 }
             });
         }
@@ -287,7 +288,7 @@ public class FoodList extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             saveUri = data.getData();
-            btnSelect.setText("Image Selected");
+            btnSelect.setText("Fotğraf Seçildi");
 
         }
     }
@@ -345,7 +346,7 @@ public class FoodList extends AppCompatActivity {
         alertDialog.setView(add_manu_layout);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
-        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -361,7 +362,7 @@ public class FoodList extends AppCompatActivity {
 
             }
         });
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -375,7 +376,7 @@ public class FoodList extends AppCompatActivity {
 
         if (saveUri != null) {
             final ProgressDialog mDialog = new ProgressDialog(this);
-            mDialog.setMessage("Uploading...");
+            mDialog.setMessage("Yükleniyor...");
             mDialog.show();
 
             String imageName = UUID.randomUUID().toString();
@@ -384,7 +385,7 @@ public class FoodList extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     mDialog.dismiss();
-                    Toast.makeText(FoodList.this, "Uploaded !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FoodList.this, "Yüklendi !", Toast.LENGTH_SHORT).show();
                     imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
@@ -404,7 +405,7 @@ public class FoodList extends AppCompatActivity {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    mDialog.setMessage("Uploaded" + progress + "%");
+                    mDialog.setMessage("Yüklendi" + progress + "%");
                 }
             });
         }

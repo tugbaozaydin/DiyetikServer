@@ -61,7 +61,7 @@ public class SignIn extends AppCompatActivity {
                     mDialog.dismiss();
                     User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
                     user.setPhone(edtPhone.getText().toString());
-                    if (Boolean.parseBoolean(user.getIsStaff())) { //IsStaff == true
+                   // if (Boolean.parseBoolean(user.getIsStaff())) { //IsStaff == true
 
                         if (user.getPassword().equals(localPassword)) {
                             //login ok
@@ -72,9 +72,9 @@ public class SignIn extends AppCompatActivity {
                         } else
                             Toast.makeText(SignIn.this, "Yanlış Parola", Toast.LENGTH_SHORT).show();
 
-                   } else
+                  /* } else
                        Toast.makeText(SignIn.this, "Lütfen admin  oturumu açın", Toast.LENGTH_SHORT).show();
-
+*/
                 } else {
                     mDialog.dismiss();
                     Toast.makeText(SignIn.this, "Böyle bir kullanıcı yoktur.", Toast.LENGTH_SHORT).show();

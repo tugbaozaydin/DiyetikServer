@@ -151,13 +151,13 @@ public class OrderStatus extends AppCompatActivity {
         final View view = inflater.inflate(R.layout.update_order_layout, null);
 
         spinner = (MaterialSpinner) view.findViewById(R.id.statusSpinner);
-        spinner.setItems("Placed", "On My Way", "Shipped");
+        spinner.setItems("Hazır", "Yolda", "Gönderildi");
 
         alertDialog.setView(view);
 
         final String localKey = key;
 
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("EVET", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 dialog.dismiss();
@@ -168,7 +168,7 @@ public class OrderStatus extends AppCompatActivity {
 
             }
         });
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("HAYIR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 dialog.dismiss();
@@ -192,16 +192,16 @@ public class OrderStatus extends AppCompatActivity {
 
                     Map<String,String> dataSend= new HashMap<>();
                     dataSend.put("title","Diyet Sepeti");
-                    dataSend.put("message","Your Order" + key + "was updated");
+                    dataSend.put("message","Siparişiniz " + key + "Güncellendi");
                     DataMessage dataMessage = new DataMessage(token.getToken(),dataSend);
 
                     mService.sendNotification(dataMessage).enqueue(new Callback<MyResponse>() {
                         @Override
                         public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                             if (response.body().success == 1) {
-                                Toast.makeText(OrderStatus.this, "Order was updated!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OrderStatus.this, "Siparişiniz Güncellendi!", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(OrderStatus.this, "Order was updated but failed to send notification!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OrderStatus.this, "Siparişiniz Güncellendi ama bildirim gönderilemedi!", Toast.LENGTH_SHORT).show();
 
                             }
                         }

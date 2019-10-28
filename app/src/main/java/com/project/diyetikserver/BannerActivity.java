@@ -162,7 +162,7 @@ public class BannerActivity extends AppCompatActivity {
         alertDialog.setView(v);
         alertDialog.setIcon(R.drawable.ic_laptop_black_24dp);
 
-        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("EVET", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -173,7 +173,7 @@ public class BannerActivity extends AppCompatActivity {
                 }
             }
         });
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("HAYIR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -187,7 +187,7 @@ public class BannerActivity extends AppCompatActivity {
     private void uploadImage() {
         if (filePath != null) {
             final ProgressDialog mDialog = new ProgressDialog(this);
-            mDialog.setMessage("Uploading...");
+            mDialog.setMessage("Yükleniyor...");
             mDialog.show();
 
             String imageName = UUID.randomUUID().toString();
@@ -196,7 +196,7 @@ public class BannerActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     mDialog.dismiss();
-                    Toast.makeText(BannerActivity.this, "Uploaded !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BannerActivity.this, "Yüklendi !", Toast.LENGTH_SHORT).show();
                     imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
@@ -220,7 +220,7 @@ public class BannerActivity extends AppCompatActivity {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    mDialog.setMessage("Uploaded" + progress + "%");
+                    mDialog.setMessage("Yüklendi" + progress + "%");
                 }
             });
         }
@@ -238,7 +238,7 @@ public class BannerActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
-            btnSelect.setText("Image Selected");
+            btnSelect.setText("Fotoğraf Seçildi");
 
         }
     }
@@ -289,7 +289,7 @@ public class BannerActivity extends AppCompatActivity {
         alertDialog.setView(editBanner);
         alertDialog.setIcon(R.drawable.ic_laptop_black_24dp);
 
-        alertDialog.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("Güncelle", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -317,7 +317,7 @@ public class BannerActivity extends AppCompatActivity {
                 loadListBanner();
             }
         });
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("HAYIR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -331,7 +331,7 @@ public class BannerActivity extends AppCompatActivity {
 
         if (filePath != null) {
             final ProgressDialog mDialog = new ProgressDialog(this);
-            mDialog.setMessage("Uploading...");
+            mDialog.setMessage("Yükleniyor...");
             mDialog.show();
 
             String imageName = UUID.randomUUID().toString();
@@ -340,7 +340,7 @@ public class BannerActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     mDialog.dismiss();
-                    Toast.makeText(BannerActivity.this, "Uploaded !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BannerActivity.this, "Yüklendi !", Toast.LENGTH_SHORT).show();
                     imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
@@ -360,7 +360,7 @@ public class BannerActivity extends AppCompatActivity {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    mDialog.setMessage("Uploaded" + progress + "%");
+                    mDialog.setMessage("Yüklendi" + progress + "%");
                 }
             });
         }

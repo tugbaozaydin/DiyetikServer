@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.project.diyetikserver">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -7,6 +8,7 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -15,7 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShipperManagement"></activity>
+        <activity
+            android:name=".Home"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ShipperManagement" />
         <activity android:name=".SendMessage" />
         <activity android:name=".BannerActivity" />
         <activity android:name=".OrderDetail" />
@@ -36,7 +42,6 @@
             android:label="@string/title_activity_tracking_order" />
         <activity android:name=".OrderStatus" />
         <activity android:name=".FoodList" />
-        <activity android:name=".Home" />
         <activity android:name=".SignIn" />
 
         <service android:name=".Service.MyFirebaseIdService">

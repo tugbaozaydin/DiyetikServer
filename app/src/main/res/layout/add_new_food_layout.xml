@@ -12,7 +12,7 @@
         android:layout_margin="20dp">
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtName"
-            android:hint="Name"
+            android:hint="İsim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimary"
@@ -27,7 +27,7 @@
             app:met_singleLineEllipsis="true"/>
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtDescription"
-            android:hint="Description"
+            android:hint="Açıklama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimary"
@@ -42,7 +42,7 @@
             app:met_singleLineEllipsis="true"/>
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPrice"
-            android:hint="Price"
+            android:hint="Fiyat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimary"
@@ -57,7 +57,7 @@
             app:met_singleLineEllipsis="true"/>
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtDiscount"
-            android:hint="Discount"
+            android:hint="İndirim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimary"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content">
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnSelect"
-                android:text="SELECT"
+                android:text="Fotoğraf Seç"
                 android:textColor="@android:color/white"
                 android:layout_marginRight="8dp"
                 android:layout_width="0dp"
@@ -94,7 +94,7 @@
                 app:cornerRadius="4dp"/>
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnUpload"
-                android:text="UPload"
+                android:text="Fotoğrafı Yükle"
                 android:textColor="@android:color/white"
                 android:layout_marginRight="8dp"
                 android:layout_width="0dp"
