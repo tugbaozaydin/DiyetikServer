@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +25,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +77,7 @@ public class Home extends AppCompatActivity
 
     Category newCategory;
     Uri saveUri;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     Query query;
     private final int PICK_IMAGE_REQUEST = 71;
@@ -81,6 +85,11 @@ public class Home extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/restaurant_font.otf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build());
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
@@ -96,6 +105,40 @@ public class Home extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
 
+        loadMenu();
+        //view
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark
+        );
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (Common.isConnectedToInterner(getBaseContext())) {
+                    loadMenu();
+                } else {
+                    Toast.makeText(getBaseContext(), "Lütfen baglantınızı kontrol ediniz!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+        });
+
+
+        //default, load for first time
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                if (Common.isConnectedToInterner(getBaseContext())) {
+                    loadMenu();
+                } else {
+                    Toast.makeText(getBaseContext(), "Lütfen baglantınızı kontrol ediniz!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+        });
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +153,7 @@ public class Home extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        loadMenu();
+
     }
 
     private void showDialog() {
@@ -254,9 +297,9 @@ public class Home extends AppCompatActivity
            }
        };
        adapter.startListening();
-
        adapter.notifyDataSetChanged();
        recycler_menu.setAdapter(adapter);
+//       swipeRefreshLayout.setRefreshing(false);
 
 
    }
@@ -309,6 +352,9 @@ public class Home extends AppCompatActivity
             Intent banner = new Intent(Home.this, ShipperManagement.class);
             startActivity(banner);
 
+        } else if (id == R.id.nav_menu) {
+            loadMenu();
+            // Handle the camera action
         } /*else if (id == R.id.nav_menu) {
             // Handle the camera action
         } else if (id == R.id.nav_cart) {
@@ -415,6 +461,16 @@ public class Home extends AppCompatActivity
         alertDialog.show();
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //fix click back button from foodand dont see category
+
+        if (adapter != null)
+            adapter.startListening();
+    }
     private void changeImage(final Category item) {
 
         if (saveUri != null) {

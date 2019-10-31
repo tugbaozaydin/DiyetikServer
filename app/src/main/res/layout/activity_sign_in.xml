@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/domates"
+    android:background="@drawable/back"
     tools:context=".SignIn">
     <LinearLayout
         android:orientation="vertical"
@@ -16,11 +16,11 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPhoneServer"
-            android:hint="Phone Number"
+            android:hint="Telefon Numarası"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:text="0000"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="34sp"
             android:inputType="phone"
@@ -33,11 +33,11 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPasswordServer"
-            android:hint="Password"
+            android:hint="Sifre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:text="1234"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="34sp"
             android:inputType="textPassword"
@@ -54,7 +54,7 @@
 
     <info.hoang8f.widget.FButton
         android:id="@+id/btnSignIn"
-        android:text="Sign In"
+        android:text="GİRİS"
         android:textColor="@android:color/white"
         android:layout_marginRight="8dp"
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         app:fButtonColor="@color/btnSignActive"
-        app:shadowColor="@android:color/black"
+
         app:shadowEnabled="true"
         app:shadowHeight="5dp"
         app:cornerRadius="4dp"/>

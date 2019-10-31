@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ import com.project.diyetikserver.Model.Category;
 import com.project.diyetikserver.Model.Food;
 import com.project.diyetikserver.ViewHolder.FoodViewHolder;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -102,15 +105,19 @@ public class FoodList extends AppCompatActivity {
         });
 
         if(getIntent()!= null)
-            categoryId=getIntent().getStringExtra("menuId");
-        if(categoryId.isEmpty())
+            categoryId=getIntent().getStringExtra("CategoryId");
+        if(!categoryId.isEmpty())
             loadListFood(categoryId);
+
+
+
     }
 
     private void showAddFoodDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(FoodList.this);
         alertDialog.setTitle("Yeni yemek ekle!");
         alertDialog.setMessage("Lütfen tüm alanları doldurunuz.");
+
 
         LayoutInflater inflater = this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.add_new_food_layout, null);
@@ -125,7 +132,9 @@ public class FoodList extends AppCompatActivity {
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseImage();
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Bir Fotoğraf Seçin"), PICK_IMAGE_REQUEST);
             }
         });
         btnUpload.setOnClickListener(new View.OnClickListener() {
@@ -155,12 +164,27 @@ public class FoodList extends AppCompatActivity {
         });
         alertDialog.show();
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageFromGallery(resultCode, data);
+        }
+    }
+
+    private void imageFromGallery(int resultCode, Intent data) {
+        saveUri = data.getData();
+
+        btnSelect.setText("Fotograf Seçildi");
+
+
+    }
     private void chooseImage() {
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         i.setType("image/");
-       // i.setAction(Intent.ACTION_GET_CONTENT);
+        i.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(i, "Fotoğraf seçiniz"), PICK_IMAGE_REQUEST);
     }
 
@@ -283,15 +307,15 @@ public class FoodList extends AppCompatActivity {
         adapter.stopListening();
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             saveUri = data.getData();
-            btnSelect.setText("Fotğraf Seçildi");
+            btnSelect.setText("Fotograf Seçildi");
 
         }
-    }
+    }*/
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {

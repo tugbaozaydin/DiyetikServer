@@ -13,7 +13,7 @@
         <ImageView
             android:id="@+id/food_image"
             android:scaleType="centerCrop"
-            android:background="@drawable/food_tava"
+            android:background="@drawable/back"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <TextView
@@ -23,7 +23,7 @@
             android:textSize="20sp"
             android:background="#4f0e0d0e"
             android:textColor="@color/white"
-            android:text="Name Of Food"
+            android:text="Yemek İsmi"
             android:id="@+id/food_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

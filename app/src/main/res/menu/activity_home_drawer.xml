@@ -21,11 +21,11 @@
             android:iconTint="@color/white"
             android:title="Menu" />
 
-        <item
-            android:id="@+id/nav_cart"
-            android:icon="@drawable/ic_shopping_cart_black_24dp"
-            android:iconTint="@color/white"
-            android:title="Sepet" />
+        <!--<item-->
+            <!--android:id="@+id/nav_cart"-->
+            <!--android:icon="@drawable/ic_shopping_cart_black_24dp"-->
+            <!--android:iconTint="@color/white"-->
+            <!--android:title="Sepet" />-->
         <item
             android:id="@+id/nav_orders"
             android:icon="@drawable/ic_access_time_black_24dp"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/domates"
+    android:background="@drawable/back"
     tools:context=".SignIn">
     <LinearLayout
         android:orientation="vertical"
@@ -60,7 +60,7 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         app:fButtonColor="@color/btnSignActive"
-        app:shadowColor="@android:color/black"
+
         app:shadowEnabled="true"
         app:shadowHeight="5dp"
         app:cornerRadius="4dp"/>

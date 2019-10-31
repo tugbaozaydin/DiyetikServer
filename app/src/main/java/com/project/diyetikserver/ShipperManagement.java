@@ -113,7 +113,7 @@ public class ShipperManagement extends AppCompatActivity {
 
     private void showEditDialog(String key,Shipper model) {
         AlertDialog.Builder create_shipper_dialog = new AlertDialog.Builder(ShipperManagement.this);
-        create_shipper_dialog.setTitle("Update Shipper");
+        create_shipper_dialog.setTitle("Nakliyeci düzenle");
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.create_shipper_layout, null);
         final MaterialEditText edtName = view.findViewById(R.id.edtName);
@@ -127,7 +127,7 @@ edtPassword.setText(model.getPassword());
         create_shipper_dialog.setView(view);
         create_shipper_dialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
         create_shipper_dialog.setPositiveButton(
-                "UPDATE", new DialogInterface.OnClickListener() {
+                "Düzenle", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -154,7 +154,7 @@ edtPassword.setText(model.getPassword());
                     }
                 }
         );
-        create_shipper_dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        create_shipper_dialog.setNegativeButton("Çıkış", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -166,7 +166,7 @@ edtPassword.setText(model.getPassword());
 
     private void showCreateShipperLayout() {
         AlertDialog.Builder create_shipper_dialog = new AlertDialog.Builder(ShipperManagement.this);
-        create_shipper_dialog.setTitle("Create Shipper");
+        create_shipper_dialog.setTitle("Nakliyeci Ekle");
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.create_shipper_layout, null);
         final MaterialEditText edtName = view.findViewById(R.id.edtName);
@@ -175,7 +175,7 @@ edtPassword.setText(model.getPassword());
         create_shipper_dialog.setView(view);
         create_shipper_dialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
         create_shipper_dialog.setPositiveButton(
-                "CREATE", new DialogInterface.OnClickListener() {
+                "Ekle", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -201,7 +201,7 @@ edtPassword.setText(model.getPassword());
                     }
                 }
         );
-        create_shipper_dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        create_shipper_dialog.setNegativeButton("Çıkış", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

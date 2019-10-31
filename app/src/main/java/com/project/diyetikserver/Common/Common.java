@@ -1,9 +1,12 @@
 package com.project.diyetikserver.Common;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.text.format.DateFormat;
 
 import com.project.diyetikserver.Model.Request;
@@ -65,6 +68,20 @@ public class Common {
 
         return scaledBitmap;
     }
+    public static boolean isConnectedToInterner(Context context){
+        ConnectivityManager connectivityManager=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager!=null){
+            NetworkInfo[] info=connectivityManager.getAllNetworkInfo();
+            if(info!=null){
+                for(int i=0; i<info.length;i++){
+                    if(info[i].getState()==NetworkInfo.State.CONNECTED)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     public static String getDate(long time){
         Calendar calendar =Calendar.getInstance(Locale.ENGLISH);

@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical|start"
-                    android:text="Product Name "
+                    android:text="Ürün İsmi "
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     />
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical|start"
-                    android:text="Product Quantity"
+                    android:text="Ürün Sayısı"
                     android:textAllCaps="true"
                     android:textStyle="italic" />
 
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical|start"
-                    android:text="Product Price"
+                    android:text="Ürün Fiyatı"
                     android:textAllCaps="true"
                     android:textStyle="italic" />
 
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical|start"
-                    android:text="Product Discount"
+                    android:text="Ürün Artışı"
                     android:textAllCaps="true"
                     android:textStyle="italic" />
             </LinearLayout>
@@ -77,7 +77,7 @@
             android:layout_weight="4">
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnEdit"
-                android:text="Edit"
+                android:text="Düzenle"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                 app:fButtonColor="@android:color/white"/>
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnRemove"
-                android:text="Romove"
+                android:text="Sil"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 app:fButtonColor="@android:color/white"/>
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnDetail"
-                android:text="Detail"
+                android:text="Detay"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                 app:fButtonColor="@android:color/white"/>
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnDirection"
-                android:text="Direction"
+                android:text="Yönet"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

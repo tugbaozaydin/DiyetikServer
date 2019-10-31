@@ -87,7 +87,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_height="wrap_content"
                 app:fButtonColor="@color/colorPrimary"
-                app:shadowColor="@android:color/black"
+
                 app:shadowEnabled="true"
                 app:shadowHeight="5dp"
                 android:layout_weight="1"
@@ -103,7 +103,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_height="wrap_content"
                 app:fButtonColor="@color/colorPrimaryDark"
-                app:shadowColor="@android:color/black"
+
                 app:shadowEnabled="true"
                 app:shadowHeight="5dp"
                 android:layout_weight="1"

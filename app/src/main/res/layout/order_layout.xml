@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardElevation="4dp">
     <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
                 android:textStyle="bold"
-                android:text="Order Date"
+                android:text="Sipariş tarihi"
                 android:textAllCaps="true"/>
             <TextView
                 android:id="@+id/order_status"
@@ -43,7 +43,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
                 android:textStyle="italic"
-                android:text="Status"
+                android:text="Durum"
                 android:textAllCaps="true"/>
 
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
                 android:textStyle="italic"
-                android:text="Adress"
+                android:text="Adres"
                 android:textAllCaps="true"/>
         </LinearLayout>
 
@@ -76,14 +76,14 @@
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnEdit"
                 android:layout_width="0dp"
-                android:text="Edit"
+                android:text="Düzenle"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 app:cornerRadius="0dp"
                 app:fButtonColor="@android:color/white" />
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnRemove"
-                android:text="Remove"
+                android:text="Sil"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -92,14 +92,14 @@
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnDetail"
                 android:layout_width="0dp"
-                android:text="Detail"
+                android:text="Detay"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 app:cornerRadius="0dp"
                 app:fButtonColor="@android:color/white" />
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnDirection"
-                android:text="Direction"
+                android:text="Yönet"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
